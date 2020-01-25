@@ -106,7 +106,7 @@ func set_node_path(new_value: NodePath) -> void:
 
 func set_original_position(node: Node) -> void:
 	if node is Node2D:
-		original_position.x = node.position.y
+		original_position.x = node.position.x
 		original_position.y = node.position.y
 	if node is Spatial:
 		original_position = node.translation
