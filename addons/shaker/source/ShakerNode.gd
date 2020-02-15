@@ -1,19 +1,21 @@
 extends Node
 # Most of the logic is based on this talk https://www.youtube.com/watch?v=tu-Qe66AvtY
 
-export(bool) var affect_position = true
-export(bool) var affect_rotation = true
-export(float) var max_rotation_shake: float = 15 # This value is measured in degrees
-export(float) var max_position_shake: float = 1 # This value is measured in meters
-export(NodePath) var node_path setget set_node_path
-export(float) var trauma_decay = 0.01 # How fast should trauma decay over time
-export(bool) var use_time_scale = true # If true, time will affect the shaking
+export (bool) var affect_position = true
+export (bool) var affect_rotation = true
+export (float) var max_rotation_shake: float = 15  # This value is measured in degrees
+export (float) var max_position_shake: float = 1  # This value is measured in meters
+export (NodePath) var node_path setget set_node_path
+export (float) var trauma_decay = 0.01  # How fast should trauma decay over time
+export (bool) var use_time_scale = true  # If true, time will affect the shaking
 
-var original_position: Vector3 setget, get_original_position
-var original_rotation: Vector3 setget, get_original_rotation
+var original_position: Vector3 setget , get_original_position
+var original_rotation: Vector3 setget , get_original_rotation
 var _elapsed_game_seconds: float = 0
 var _noise_generator := OpenSimplexNoise.new()
-var _seeds: Array = [randi(), randi(), randi(), randi(), randi(), randi(), randi(), randi(), randi()]
+var _seeds: Array = [
+	randi(), randi(), randi(), randi(), randi(), randi(), randi(), randi(), randi()
+]
 var _trauma_amount: float = 0
 var _is_node_rotation_modified: bool = false
 var _is_node_position_modified: bool = false
@@ -21,7 +23,7 @@ var _is_node_position_modified: bool = false
 onready var _node: Node = get_node(node_path)
 
 
-func _process(delta : float) -> void:
+func _process(delta: float) -> void:
 	_elapsed_game_seconds += delta
 	if _node:
 		if _trauma_amount > 0:
@@ -32,7 +34,9 @@ func _process(delta : float) -> void:
 					_is_node_rotation_modified = true
 
 				if _node is Node2D:
-					var rotation_shake: float = _get_shake(max_rotation_shake, shake_amount, _seeds[0])
+					var rotation_shake: float = _get_shake(
+						max_rotation_shake, shake_amount, _seeds[0]
+					)
 					_node.rotation = get_original_rotation()
 					_node.rotation = deg2rad(rotation_shake)
 
@@ -82,16 +86,20 @@ func _process(delta : float) -> void:
 	# Decrease trauma linearly
 	_trauma_amount = max(_trauma_amount - trauma_decay * Engine.time_scale, 0)
 
+
 ##########
 # Trauma #
 ##########
 
+
 func add_trauma(amount: float) -> void:
 	_trauma_amount = min(_trauma_amount + amount, 1)
+
 
 #############
 # Node path #
 #############
+
 
 func set_node_path(new_value: NodePath) -> void:
 	node_path = new_value
@@ -100,9 +108,11 @@ func set_node_path(new_value: NodePath) -> void:
 		set_original_position(_node)
 		set_original_rotation(_node)
 
+
 #####################
 # Original position #
 #####################
+
 
 func set_original_position(node: Node) -> void:
 	if node is Node2D:
@@ -118,9 +128,11 @@ func get_original_position():
 	if _node is Spatial:
 		return original_position
 
+
 #####################
 # Original rotation #
 #####################
+
 
 func set_original_rotation(node: Node) -> void:
 	if node is Node2D:
@@ -135,17 +147,21 @@ func get_original_rotation():
 	if _node is Spatial:
 		return original_rotation
 
+
 #########
 # Noise #
 #########
+
 
 func _get_noise(x: int) -> float:
 	var y: float = _elapsed_game_seconds * 1000 if use_time_scale else randi()
 	return _noise_generator.get_noise_2d(x, y)
 
+
 #########
 # Shake #
 #########
+
 
 func _get_shake(maximum: float, amount: float, x: int) -> float:
 	return maximum * amount * _get_noise(x)
