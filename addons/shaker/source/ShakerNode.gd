@@ -1,5 +1,4 @@
 extends Node
-# Most of the logic is based on this talk https://www.youtube.com/watch?v=tu-Qe66AvtY
 
 export (bool) var affect_position = true
 export (bool) var affect_rotation = true
