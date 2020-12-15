@@ -2,7 +2,11 @@
 
 This plugin adds a `Shaker` node that will modify the target's position and rotation to achieve a _shaking_ effect.
 
-## How to use
+## Credits
+
+The core logic comes from [this talk](https://www.youtube.com/watch?v=tu-Qe66AvtY) given by Squirrel Eiserloh at GDC.
+
+## How to use it
 
 1. Add the node to the scene tree.
 2. Select which node will the `Shaker` shake through the `Node Path` variable.
