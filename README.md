@@ -6,16 +6,14 @@ This plugin adds a `Shaker` node that will modify the target's position and rota
 
 The core logic comes from [this talk](https://www.youtube.com/watch?v=tu-Qe66AvtY) given by Squirrel Eiserloh at GDC.
 
+If you want to understand how it works, I recommend you to check it out.
+
 ## How to use it
 
 1. Add the node to the scene tree.
 2. Select which node will the `Shaker` shake through the `Node Path` variable.
 3. Adjust the rest of the exported variables to your heart's desire.
 4. Call the [add_trauma()](https://github.com/Awkor/godot-shaker/blob/master/addons/shaker/source/ShakerNode.gd#L95) function to shake things up.
-
-## How does it work
-
-The main logic comes from the first half of this [talk](https://www.youtube.com/watch?v=tu-Qe66AvtY), so if you want to understand how it works, I recommend you to check out that link.
 
 ## Little caveats
 
