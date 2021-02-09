@@ -13,7 +13,7 @@ If you want to understand how it works, I recommend you to check it out.
 1. Add the node to the scene tree.
 2. Select which node will the `Shaker` shake through the `Node Path` variable.
 3. Adjust the rest of the exported variables to your heart's desire.
-4. Call the [add_trauma()](https://github.com/Awkor/godot-shaker/blob/master/addons/shaker/source/ShakerNode.gd#L95) function to shake things up.
+4. Call the [add_trauma()](https://github.com/Awkor/godot-shaker/blob/master/addons/shaker/source/ShakerNode.gd#L94) function to shake things up.
 
 ## Little caveats
 
